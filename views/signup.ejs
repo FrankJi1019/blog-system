@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+
+    <div class="center">
+
+        <%- include("./partials/header.ejs", {currentUser}) %> 
+
+        <form action="/signup" method="POST">
+
+            <div class="form">
+
+                <div class="username">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username">
+                    <% if (isUsernameExist) { %>
+                        <span>Username exists</span>
+                    <% } else if (isUsernameEmpty) { %>
+                        <span>Username cannot be empty</span>  
+                    <% } %> 
+                </div>
+
+                <div class="password">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
+                    <% if (isPasswordDifferent) { %>
+                        <span>Passwords didn't match</span>
+                    <% } else if (isPasswordValid) { %>
+                        <span>
+                            Password must contain at least 8 character, and mix at least
+                            two of numbers, letters, and symbols ( _ or . )
+                        </span>
+                    <% } %> 
+                </div>
+
+                <div class="confirm-password">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" name="confirmPassword" id="confirm-password">
+                </div>
+
+                <button type="submit">Submit</button>
+
+            </div>
+
+        </form>
+
+        
+
+    </div>
+    
+</body>
+</html>

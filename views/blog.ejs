@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+
+
+    <div class="center">
+
+        <%- include("./partials/header.ejs", {currentUser}) %> 
+
+        <div class="blog">
+            <h3 class="title">
+                <%= blog.title %>
+            </h3>
+            <% if (currentUser != null && currentUser.username == blog.author) { %> 
+                <button class="delete" data-id="<%= blog._id %>">
+                    delete
+                </button>
+            <% } %> 
+            <span class="author">
+                <%= blog.author %>
+            </span>
+            <br>
+            <span class="time">
+                <% const time = blog.time %> 
+                <%= `${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}` %> 
+            </span>
+            <div class="sep"></div>
+            <% const sections = blog.content.split("\n") %> 
+            <% for (let i = 0; i < sections.length; i++) { %> 
+                <p class="content">
+                    <%= sections[i] %>
+                </p>
+            <% } %> 
+        </div>
+
+    </div>
+
+    <script>
+
+        const btn = document.querySelector("button.delete")
+        const id = btn.dataset.id
+        btn.addEventListener("click", () => {
+            fetch(`/${id}`, {
+                method: "DELETE"
+            }).then(res => res.json())
+            .then(res => {
+                window.location.href = res.redirect
+            })
+        })
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="overview.css">
+    <link rel="stylesheet" href="header.css">
+</head>
+<body>
+
+    <div class="center">
+
+        <%- include("./partials/header.ejs", {currentUser}) %> 
+
+        <% if (blogs.length == 0) { %>
+            <div class="no-blog">
+                No blog has been created
+            </div>
+        <% } else { %>
+            <% for (let i = 0; i < blogs.length; i++) { %>
+                <div class="blog">
+                    <a href="/<%= blogs[i]._id %>">
+                        <div class="top">
+                            <span class="title"><%= blogs[i].title %></span>
+                            <span class="author">by <%= blogs[i].author %></span>
+                        </div>
+                        <% const time = blogs[i].time %> 
+                        <div class="created-at">
+                            <%= `${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}` %> 
+                        </div>
+                    </a>
+                </div>
+            <% } %>
+        <% } %>  
+
+        <div class="create-new">
+            <a href="/new">
+                New Blog
+            </a>
+        </div>
+
+    </div>
+    
+</body>
+</html>

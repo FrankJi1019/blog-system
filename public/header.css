@@ -1,0 +1,58 @@
+header {
+    display: flex;
+    overflow: hidden;
+    height: 80px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1.logo {
+    margin-left: 30px;
+    color: rgb(20, 20, 20)
+}
+
+.logo {
+    cursor: pointer;
+}
+
+header div.user {
+    float: right;
+    overflow: hidden;
+    margin-right: 30px;
+}
+
+header div.user div {
+    float: left;
+}
+
+header div.user div.log-in,
+header div.user div.sign-up {
+    cursor: pointer;
+}
+
+header div.user div.log-in:hover a,
+header div.user div.sign-up:hover a {
+    color: red;
+}
+
+header div.user div.sep {
+    margin: 0 10px;
+}
+
+div.sep-line {
+    height: 2px;
+    background-color: rgb(30, 30, 30);
+    margin-bottom: 30px;
+}
+
+header a.log-out {
+    font-size: 14px;
+    display: block;
+    text-align: right;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+header a.log-out:hover {
+    color: red;
+}

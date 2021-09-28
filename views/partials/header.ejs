@@ -1,0 +1,48 @@
+<header>
+    <h1 class="logo">
+        <a href="/">
+            MY BLOG
+        </a>
+    </h1>
+    
+    <% if (currentUser == null) { %>
+        <div class="user">
+            <div class="log-in">
+                <a href="/login">
+                    Log in
+                </a>
+            </div>
+            <div class="sep">
+                |
+            </div>
+            <div class="sign-up">
+                <a href="/signup">
+                    Sign up
+                </a>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="user">
+            Hello, <%= currentUser.username %>
+            <br>
+            <a href="javasript:void(0)" class="log-out">log out</a>
+        </div> 
+    <% } %> 
+
+</header>
+
+<div class="sep-line"></div>
+
+<script>
+
+    const logout = document.querySelector("a.log-out")
+    logout.addEventListener("click", () => {
+        fetch("/", {
+            method: "POST"
+        }).then(res => res.json())
+        .then(res => {
+            window.location.href = res
+        })
+    })
+
+</script>
