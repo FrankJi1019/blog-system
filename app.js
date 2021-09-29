@@ -142,7 +142,9 @@ app.get("/new", (req, res) => {
         res.redirect("/login");
     } else {
         res.render("new", {
-            currentUser
+            currentUser,
+            isTitleEmpty: false,
+            isContentEmpty: false
         })
     }
 })
@@ -151,6 +153,13 @@ app.post("/new", (req, res) => {
     const title = req.body.title
     const content = req.body.content
     const author = currentUser.username
+    if(title.length == 0 || content.length == 0) {
+        res.render("new", {
+            currentUser,
+            isTitleEmpty: title.length == 0,
+            isContentEmpty: content.length == 0
+        })
+    }
     const time = new Date()
     const blog = new Blog({title, content, author, time})
     blog.save()
