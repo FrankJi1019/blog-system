@@ -17,9 +17,10 @@ div.blog .time {
     font-size: 13px;
 }
 
-div.blog button.delete {
+div.blog button.delete,
+div.blog button.edit {
+    width: 70px;
     float: right;
-    margin: 0 100px;
     padding: 3px 7px;
     background-color: transparent;
     border: 1px solid #000;
@@ -29,7 +30,16 @@ div.blog button.delete {
     border-radius: 10px;
 }
 
-div.blog button.delete:hover {
+div.blog button.delete {
+    margin-right: 70px;
+}
+
+div.blog button.edit {
+    margin-right: 30px;
+}
+
+div.blog button.delete:hover,
+div.blog button.edit:hover {
     border-color: transparent;
     box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .3);
 }
@@ -41,7 +51,44 @@ div.blog .sep {
     margin: 10px 0;
 }
 
-div.blog .content {
+div.blog p.content {
     width: 800px;
     margin: 10px auto;
+}
+
+div.blog #update {
+    display: none;
+}
+
+form#update textarea {
+    display: block;
+    resize: none;
+    width: 800px;
+    height: 200px;
+    padding: 5px 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    margin: 25px auto;
+    outline: none;
+}
+
+form#update button {
+    width: 70px;
+    padding: 3px 7px;
+    background-color: transparent;
+    border: 1px solid #000;
+    outline: none;
+    font-size: 18px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+    margin: 0 30px;
+}
+
+form#update button:hover {
+    border-color: transparent;
+    box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .3);
+}
+
+form#update div {
+    text-align: center;
 }

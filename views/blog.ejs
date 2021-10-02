@@ -24,6 +24,9 @@
                 <button class="delete" data-id="<%= blog._id %>">
                     delete
                 </button>
+                <button class="edit" data-id="<% blog._id %>">
+                    edit
+                </button>
             <% } %> 
             <span class="author">
                 <%= blog.author %>
@@ -34,18 +37,26 @@
                 <%= `${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}` %> 
             </span>
             <div class="sep"></div>
-            <% const sections = blog.content.split("\n") %> 
-            <% for (let i = 0; i < sections.length; i++) { %> 
-                <p class="content">
-                    <%= sections[i] %>
-                </p>
-            <% } %> 
+            <div class="content">
+                <% const sections = blog.content.split("\n") %> 
+                <% for (let i = 0; i < sections.length; i++) { %> 
+                    <p class="content">
+                        <%= sections[i] %>
+                    </p>
+                <% } %> 
+            </div>
+            <form action="/<%= blog._id %>" method="POST" id="update">
+                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                <div>
+                    <button type="submit" class="submit">Save</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
         </div>
 
     </div>
 
     <script>
-
         const btn = document.querySelector("button.delete")
         const id = btn.dataset.id
         btn.addEventListener("click", () => {
@@ -55,6 +66,33 @@
             .then(res => {
                 window.location.href = res.redirect
             })
+        })
+    </script>
+
+    <script>
+
+        const edit = document.querySelector("button.edit")
+
+        const content = document.querySelector("div.content")
+        const allP = document.querySelectorAll("div.content p")
+        const updateForm = document.querySelector("form#update")
+        const textarea = document.querySelector("form#update textarea")
+
+        const cancel = document.querySelector("form#update button.cancel")
+
+        edit.addEventListener("click", () => {
+            let text = ""
+            for(let i = 0; i < allP.length; i++) {
+                text = text + allP[i].innerText + "\n"
+            }
+            content.style.display = "none"
+            updateForm.style.display = "block"
+            textarea.value = text
+        })
+
+        cancel.addEventListener("click", () => {
+            content.style.display = "block"
+            updateForm.style.display = "none"
         })
 
     </script>

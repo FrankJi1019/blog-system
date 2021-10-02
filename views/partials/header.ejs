@@ -36,13 +36,15 @@
 <script>
 
     const logout = document.querySelector("a.log-out")
-    logout.addEventListener("click", () => {
-        fetch("/", {
-            method: "POST"
-        }).then(res => res.json())
-        .then(res => {
-            window.location.href = res
+    if (logout) {
+        logout.addEventListener("click", () => {
+            fetch("/", {
+                method: "POST"
+            }).then(res => res.json())
+            .then(res => {
+                window.location.href = res
+            })
         })
-    })
+    }
 
 </script>

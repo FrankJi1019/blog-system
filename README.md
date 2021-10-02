@@ -6,11 +6,11 @@ This is a blog system created using NodeJS as backend support, and MongoDB Cloud
 
 1. overview page
 
-In this page, you can see all the blogs that are created by different people, even if you are not logged in. From this page, you can also sign up, log in, and create new blog. Note that new blog can only be created when you are logged in. 
+This is the page you will first get if you request "localhost:3000" in the browser. In this page, you can see all the blogs that are created by different people, even if you are not logged in. From this page, you can also sign up, log in, and create new blog. Note that new blog can only be created when you are logged in.
 
 2. blog page
 
-In this page, you are presented with the content of the blog. You can view the content even if you are not logged in. And if you are the author of the blog, you can choose to delete it if you wish to.
+In this page, you are presented with the content of the blog. You can view the content even if you are not logged in. And if you are the author of the blog, you can choose to edit or delete it.
 
 3. create blog page
 
@@ -33,6 +33,8 @@ You can log in to the system from this page. You will be asked to enter the user
 > ```
 > node app
 > ```
+
+4. Visit "localhost:3000" in the browser
 
 ## Technologies used
 

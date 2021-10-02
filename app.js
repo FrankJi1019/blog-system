@@ -198,6 +198,19 @@ app.delete("/:id", (req, res) => {
     })
 })
 
+app.post("/:id", (req, res) => {
+    Blog.findByIdAndUpdate(req.params.id, {
+        content: req.body.content
+    }, () => {
+        Blog.findById(req.params.id).then((blog) => {
+            res.render("blog", {
+                blog,
+                currentUser
+            })
+        })
+    })
+})
+
 app.use((req, res) => {
     res.render("404", {
         currentUser
