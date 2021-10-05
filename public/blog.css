@@ -9,18 +9,33 @@ div.blog .title {
     margin-bottom: 10px;
 }
 
-div.blog .author,
-div.blog .time {
+div.sub-heading {
+    padding: 3px;
+    overflow: hidden;
+}
+
+div.blog-info {
+    text-align: right;
+    float: left;
+}
+
+div.blog .author {
     /* display: block; */
     text-align: right;
-    margin: 0 100px;
+    margin-left: 50px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+div.blog .time {
+    margin-left: 5px;
     font-size: 13px;
 }
 
 div.blog button.delete,
 div.blog button.edit {
     width: 70px;
-    float: right;
+    /* float: right; */
     padding: 3px 7px;
     background-color: transparent;
     border: 1px solid #000;
@@ -28,20 +43,19 @@ div.blog button.edit {
     font-size: 18px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 10px;
-}
-
-div.blog button.delete {
-    margin-right: 70px;
-}
-
-div.blog button.edit {
     margin-right: 30px;
 }
 
 div.blog button.delete:hover,
 div.blog button.edit:hover {
-    border-color: transparent;
-    box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .3);
+    border-color: #ccc;
+    /* box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .3); */
+    color: white;
+    background-color: #ccc;
+}
+
+div.edit-delete {
+    float: right;
 }
 
 div.blog .sep {
@@ -51,16 +65,26 @@ div.blog .sep {
     margin: 10px 0;
 }
 
+div.blog div.content {
+    border: 1px solid transparent;
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .2);
+    margin-bottom: 50px;
+}
+
 div.blog p.content {
     width: 800px;
     margin: 10px auto;
 }
 
-div.blog #update {
+div.blog .update {
     display: none;
 }
 
-form#update textarea {
+div.update textarea {
     display: block;
     resize: none;
     width: 800px;
@@ -72,23 +96,91 @@ form#update textarea {
     outline: none;
 }
 
-form#update button {
+div.update button {
     width: 70px;
-    padding: 3px 7px;
+    /* padding: 3px 7px;
     background-color: transparent;
     border: 1px solid #000;
     outline: none;
     font-size: 18px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    border-radius: 10px;
+    border-radius: 10px; */
     margin: 0 30px;
 }
 
-form#update button:hover {
+div.update button:hover {
     border-color: transparent;
     box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .3);
 }
 
-form#update div {
+div.update div {
     text-align: center;
+}
+
+div.comment {
+    /* width: 800px; */
+    padding: 40px 50px 20px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .2);
+    border-radius: 20px;
+    /* margin-top: 20px; */
+}
+
+div.comment div.prompt {
+    text-align: center;
+}
+
+div.comment div.prompt input {
+    outline: none;
+    font-size: 14px;
+    padding-left: 10px;
+    height: 25px;
+    width: 400px;
+}
+
+div.comment div.prompt button.new-comment {
+    padding: 3px 10px;
+    background-color: transparent;
+    border: 1px solid #000;
+    outline: none;
+    font-size: 16px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+    margin: 0 15px;
+}
+
+div.comment div.prompt button.new-comment:hover {
+    border-color: #ccc;
+    /* box-shadow: 0px 0px 5px 1.4px rgba(0, 0, 0, .3); */
+    background-color: #ccc;
+    color: white;
+}
+
+div.comment div.display div.single-comment {
+    position: relative;
+    margin: 10px 0;
+    padding: 10px 0;
+    /* border-top: 1px solid #ccc; */
+    border-bottom: 1px solid #ccc;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+div.comment div.display div.single-comment div.creator {
+
+}
+
+div.comment div.display div.single-comment div.comment-content {
+    margin-left: 15px;
+    margin-top: 3px;
+    color: #777;
+    word-wrap: break-word;
+    word-break: normal;
+    width: 600px;
+}
+
+div.comment div.display div.single-comment div.comment-time {
+    position: absolute;
+    top: 20px;
+    right: 30px;
 }

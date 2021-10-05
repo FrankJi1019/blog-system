@@ -20,23 +20,31 @@
             <h3 class="title">
                 <%= blog.title %>
             </h3>
-            <% if (currentUser != null && currentUser.username == blog.author) { %> 
-                <button class="delete" data-id="<%= blog._id %>">
-                    delete
-                </button>
-                <button class="edit" data-id="<% blog._id %>">
-                    edit
-                </button>
-            <% } %> 
-            <span class="author">
-                <%= blog.author %>
-            </span>
-            <br>
-            <span class="time">
-                <% const time = blog.time %> 
-                <%= `${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}` %> 
-            </span>
-            <div class="sep"></div>
+            
+            <div class="sub-heading">
+                <div class="blog-info">
+                    <span class="author">
+                        <%= blog.author %>
+                    </span>
+                    <!-- <br> -->
+                    |
+                    <span class="time">
+                        <% const time = blog.time %> 
+                        <%= `${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}` %> 
+                    </span>
+                </div>
+                <div class="edit-delete">
+                    <% if (currentUser != null && currentUser.username == blog.author) { %> 
+                        <button class="delete" data-id="<%= blog._id %>">
+                            delete
+                        </button>
+                        <button class="edit" data-id="<% blog._id %>">
+                            edit
+                        </button>
+                    <% } %> 
+                </div>
+            </div>
+            <!-- <div class="sep"></div> -->
             <div class="content">
                 <% const sections = blog.content.split("\n") %> 
                 <% for (let i = 0; i < sections.length; i++) { %> 
@@ -45,13 +53,37 @@
                     </p>
                 <% } %> 
             </div>
-            <form action="/<%= blog._id %>" method="POST" id="update">
+            <div class="comment">
+                <% if (currentUser != null) { %> 
+                    <div class="prompt">
+                        <input type="text" name="comment" class="comment">
+                        <button class="new-comment" data-id="<%= blog._id %>">Comment</button>
+                    </div>
+                <% } %> 
+                <div class="display">
+                    <% for (let i = 0; i < blog.comment.length; i++) { %>
+                        <div class="single-comment">
+                            <div class="creator">
+                                <%= blog.comment[i].creator.username %>:
+                            </div>
+                            <div class="comment-content">
+                                <%= blog.comment[i].content %>
+                            </div>
+                            <div class="comment-time">
+                                <% const time = blog.comment[i].time %> 
+                                <%= `${time.getFullYear()}-${time.getMonth()}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}` %> 
+                            </div>
+                        </div>    
+                    <% } %> 
+                </div>
+            </div>
+            <div class="update">
                 <textarea name="content" id="content" cols="30" rows="10"></textarea>
                 <div>
-                    <button type="submit" class="submit">Save</button>
-                    <button type="button" class="cancel">Cancel</button>
+                    <button class="submit std-btn" data-id="<%= blog._id %>">Save</button>
+                    <button class="cancel std-btn">Cancel</button>
                 </div>
-            </form>
+            </div>
         </div>
 
     </div>
@@ -75,10 +107,12 @@
 
         const content = document.querySelector("div.content")
         const allP = document.querySelectorAll("div.content p")
-        const updateForm = document.querySelector("form#update")
-        const textarea = document.querySelector("form#update textarea")
+        const updateForm = document.querySelector("div.update")
+        const textarea = document.querySelector("div.update textarea")
 
-        const cancel = document.querySelector("form#update button.cancel")
+        const cancel = document.querySelector("div.update button.cancel")
+        const save = document.querySelector("div.update button.submit")
+        const commentBox = document.querySelector("div.comment")
 
         edit.addEventListener("click", () => {
             let text = ""
@@ -87,12 +121,51 @@
             }
             content.style.display = "none"
             updateForm.style.display = "block"
+            commentBox.style.display = "none"
             textarea.value = text
+        })
+
+        save.addEventListener("click", () => {
+            const content = textarea.value
+            const request = new XMLHttpRequest()
+            const id = save.dataset.id
+            request.onreadystatechange = () => {
+                if (request.readyState == 4 && request.status == 200) {
+                    console.log(123);
+                    cancel.click()
+                    const url = request.responseText
+                    window.location.href = url
+                }
+            }
+            request.open("POST", `/${id}?update=content`, true)
+            request.send(content)
         })
 
         cancel.addEventListener("click", () => {
             content.style.display = "block"
             updateForm.style.display = "none"
+            commentBox.style.display = "block"
+        })
+
+    </script>
+
+    <script>
+
+        const button = document.querySelector("button.new-comment")
+
+        button.addEventListener("click", () => {
+            const input = document.querySelector("div.comment input")
+            const comment = input.value
+            if (comment.length != 0) {
+                const request = new XMLHttpRequest()
+                request.onreadystatechange = () => {
+                    if (request.readyState == 4 && request.status == 200) {
+                        window.location.href = request.responseText
+                    }
+                }
+                request.open("POST", `/${id}?update=comment`, true)
+                request.send(comment)
+            }
         })
 
     </script>

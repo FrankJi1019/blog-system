@@ -17,6 +17,10 @@ const blogSchema = new Schema({
     time: {
         type: Date,
         required: true
+    },
+    comment: {
+        type: Array,
+        required: true
     }
 })
 

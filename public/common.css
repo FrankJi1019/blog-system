@@ -13,3 +13,21 @@ a {
     text-decoration: none;
     color: black;
 }
+
+.std-btn {
+    padding: 3px 7px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    outline: none;
+    font-size: 18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+}
+
+.std-btn:hover {
+    border-color: #ccc;
+}
+
+body {
+    padding-bottom: 30px;
+}

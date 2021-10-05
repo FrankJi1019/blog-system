@@ -9,6 +9,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const User = require("./models/User")
 const Blog = require("./models/Blog")
+const url = require("url")
 
 const app = express()
 
@@ -161,7 +162,7 @@ app.post("/new", (req, res) => {
         })
     }
     const time = new Date()
-    const blog = new Blog({title, content, author, time})
+    const blog = new Blog({title, content, author, time, comment: []})
     blog.save()
     .then(() => {
         res.redirect("/")
@@ -199,16 +200,37 @@ app.delete("/:id", (req, res) => {
 })
 
 app.post("/:id", (req, res) => {
-    Blog.findByIdAndUpdate(req.params.id, {
-        content: req.body.content
-    }, () => {
-        Blog.findById(req.params.id).then((blog) => {
-            res.render("blog", {
-                blog,
-                currentUser
+
+    const variables = url.parse(req.url, true).query
+    const blogID = req.params.id
+
+    // update the blog content
+    if (variables.update == "content") {
+        req.on("data", newContent => {
+            Blog.findByIdAndUpdate(blogID, {
+                content: newContent
+            }, () => {
+                res.send(`/${blogID}`)
             })
         })
-    })
+    } else if (variables.update == "comment") {
+        req.on("data", newComment => {
+            const comment = {
+                creator: currentUser,
+                content: newComment,
+                time: new Date()
+            }
+            Blog.findById(blogID).then(blog => {
+                let commentArray = blog.comment
+                commentArray.push(comment)
+                Blog.findByIdAndUpdate(blogID, {
+                    comment: commentArray
+                }, () => {
+                    res.send(`/${blogID}`)
+                })
+            })
+        })
+    }
 })
 
 app.use((req, res) => {
