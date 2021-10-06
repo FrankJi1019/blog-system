@@ -1,43 +1,71 @@
 # Blog System
 
-## Project introduction
+## Set up
 
-This is a blog system created using NodeJS as backend support, and MongoDB Cloud as the database. There are mainly five pages:
+To run this program, please follow the steps below:
 
-1. overview page
+1. please make sure you have node installed on your device
+2. download the repo folder and direct to it
+3. on the terminal, execute the following command
 
-This is the page you will first get if you request "localhost:3000" in the browser. In this page, you can see all the blogs that are created by different people, even if you are not logged in. From this page, you can also sign up, log in, and create new blog. Note that new blog can only be created when you are logged in.
-
-2. blog page
-
-In this page, you are presented with the content of the blog. You can view the content even if you are not logged in. And if you are the author of the blog, you can choose to edit or delete it.
-
-3. create blog page
-
-You can direct to this page from the overview page. But when you do so, you will only be directed to this page if you are logged in. If not, you will be directed to the log in page.
-
-4. sign up page
-
-You can create new account in this page. You will be asked to enter your username, password, and confirm password. The password must be at least 8 characters and be a mix of at least two of numbers, character, and symbols (only _ is allowed for symbol)
-
-5. log in page
-
-You can log in to the system from this page. You will be asked to enter the username and the password. And you can log out whenever you want to.
-
-## To run the project
-
-1. Please you have node installed on your device
-2. Download the project folder the change the current working directory to this folder
-3. Run the following command
-
-> ```
+```
 > node app
-> ```
+```
 
-4. Visit "localhost:3000" in the browser
+4. The following text should have been displayed on the console
 
-## Technologies used
+```
+Server powered on
+```
 
-* Express is used in this project to create request handlers.
-* EJS is used to create views.
-* MongoDB Cloud and mongoose are used to provide database support
+5. in the browser, visit the link "localhost:3000"
+
+## Introduction
+
+The system consists of five pages:
+
+### Overview page
+
+This is the page you will first see when you request "localhost:3000" in the browser. From this page, you can do the following things
+
+1. Log in (if you have an account) and sign up (to create a new account)
+2. View the content of a blog. You can still read the content even if you are not logged in
+3. Create new blog, but you can only do this when you are logged in. If you try to create a new blog without logging in, you will be directed to the login page
+
+### Blog page
+
+You can access this page by clicking a blog from the overview page. In this page, you are presented with the blog title, author of the blog, the entire content of the blog, the time that the blog was created, and the comments on this blog. For each comment, you can see who wrote the comment and when it is written. If you are logged in, you will have the option to leave your comment under the blog. And if you are the author of this blog, you can edit or delete the blog.
+
+### Create new blog page
+
+In this page you are allowed to create a new blog. You are required to write the title and the content of the blog - you can not leave them blank. 
+
+### Log in page
+
+Where you can log into the system if you have already got an account. You will be redirected to the overview page after logging in. You can also choose to log out later on.
+
+### Sign up page
+
+Where you can create a new account. You will be asked to enter the username, password, and confirm password.
+
+Please also note that, no matter which page you are currently on, you are presented with a header, you can always go to the homepage (overview page) by clicking on the project title (MY BLOG) on the left side of the header
+
+## Techniques used
+
+1. NodeJS, as the back-end support
+    1. express module - to create request handlers
+    2. mongoose module - to interact with the database
+2. MongoDB Cloud: a cloud based mongo database, to store the information of all users and blogs
+3. EJS as the view engine
+4. CSS
+5. AJAX
+6. ES6
+
+## Development Clarification
+
+This is a project developed by Shiyuan (Frank) Ji solely. It is developed to wider the area of knowledge and gain more experience in development. This is not a project developed for a coursework of university or a task for any organization, but on own interest. 
+
+Concepts related to this project were not taught by any organization, but were self-learned from Youtube videos. The link to the videos is below
+
+*https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU*
+
